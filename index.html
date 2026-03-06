@@ -2,102 +2,121 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard USIL Mobile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>USIL Dashboard Mobile Optimized</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .nav-tab.active { background-color: white; color: #002855; border-bottom: 4px solid #60a5fa; }
-        th { background-color: #002855; color: white; padding: 8px; font-size: 10px; text-transform: uppercase; white-space: nowrap; }
-        td { padding: 6px; border: 1px solid #e2e8f0; font-size: 10px; }
+        .nav-tab.active { background-color: white; color: #002855; border-bottom: 3px solid #60a5fa; }
+        /* Ocultar barra de scroll pero permitir funcionalidad */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        canvas { max-width: 100% !important; }
     </style>
 </head>
-<body class="bg-[#f0f2f5] font-sans text-gray-800">
+<body class="bg-gray-50 font-sans text-gray-900 leading-tight">
 
-    <header class="bg-[#002855] text-white p-4 shadow-md">
-        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-            <div class="flex items-center space-x-3">
-                <span class="font-bold text-2xl tracking-tighter">USIL</span>
-                <div class="h-6 w-px bg-blue-400 hidden md:block"></div>
-                <h1 class="text-sm md:text-lg font-bold uppercase">Cuadro de Mando de Adquisición de Estudiantes USIL</h1>
+    <header class="bg-[#002855] text-white p-3 sticky top-0 z-50 shadow-md">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="font-black text-xl tracking-tighter">USIL</span>
+                <span class="text-[10px] uppercase font-bold border-l border-blue-400 pl-2 leading-none">Dashboard<br>Adquisición</span>
             </div>
-            <div class="text-[10px] md:text-xs opacity-80 italic">Rango: Jan 1 - Dec 31, 2026</div>
+            <div class="text-[9px] bg-blue-900 px-2 py-1 rounded">2026</div>
         </div>
     </header>
 
-    <nav class="bg-[#002855] border-t border-blue-900 flex text-white text-[10px] font-bold uppercase overflow-x-auto no-scrollbar">
-        <button onclick="changeTab(this, 'vista-general')" class="nav-tab active px-6 py-4 flex-shrink-0">1. Vista General</button>
-        <button onclick="changeTab(this, 'rendimiento-canal')" class="nav-tab px-6 py-4 flex-shrink-0">2. Rendimiento Canal</button>
-        <button onclick="changeTab(this, 'rendimiento-campana')" class="nav-tab px-6 py-4 flex-shrink-0">3. Rendimiento Campaña</button>
-        <button onclick="changeTab(this, 'rendimiento-academico')" class="nav-tab px-6 py-4 flex-shrink-0">4. Rendimiento Académico</button>
+    <nav class="bg-[#002855] border-t border-blue-800 flex overflow-x-auto no-scrollbar sticky top-[52px] z-40 shadow-sm">
+        <button onclick="changeTab(this, 'vista-general')" class="nav-tab active px-5 py-3 text-[10px] font-bold uppercase flex-shrink-0">1. Resumen</button>
+        <button onclick="changeTab(this, 'rendimiento-canal')" class="nav-tab px-5 py-3 text-[10px] font-bold uppercase flex-shrink-0">2. Canales</button>
+        <button onclick="changeTab(this, 'rendimiento-campana')" class="nav-tab px-5 py-3 text-[10px] font-bold uppercase flex-shrink-0">3. Campañas</button>
+        <button onclick="changeTab(this, 'rendimiento-academico')" class="nav-tab px-5 py-3 text-[10px] font-bold uppercase flex-shrink-0">4. Académico</button>
     </nav>
 
-    <main class="p-4 space-y-4">
+    <main class="p-3 space-y-4">
         
-        <div id="vista-general" class="tab-content active space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
-                <div class="bg-white p-3 shadow-sm rounded border-t-4 border-blue-600">
-                    <p class="text-[10px] font-bold text-gray-500 uppercase">Inversión Total</p>
-                    <h2 class="text-xl font-bold">$150,000 <span class="text-green-500 text-xs">▲ +10%</span></h2>
+        <div id="vista-general" class="tab-content active space-y-3">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                <div class="bg-white p-3 rounded shadow-sm border-t-2 border-blue-600">
+                    <p class="text-[9px] uppercase text-gray-400 font-bold">Inversión</p>
+                    <p class="text-sm font-bold">$150,000</p>
+                    <p class="text-[8px] text-green-500 font-bold">▲ 10%</p>
                 </div>
-                <div class="bg-white p-3 shadow-sm rounded border-t-4 border-blue-600">
-                    <p class="text-[10px] font-bold text-gray-500 uppercase">Leads Totales</p>
-                    <h2 class="text-xl font-bold">2,100 <span class="text-green-500 text-xs">+15%</span></h2>
+                <div class="bg-white p-3 rounded shadow-sm border-t-2 border-blue-600">
+                    <p class="text-[9px] uppercase text-gray-400 font-bold">Leads</p>
+                    <p class="text-sm font-bold">2,100</p>
+                    <p class="text-[8px] text-green-500 font-bold">▲ 15%</p>
                 </div>
-                <div class="bg-white p-3 shadow-sm rounded border-t-4 border-blue-600">
-                    <p class="text-[10px] font-bold text-gray-500 uppercase">CPL</p>
-                    <h2 class="text-xl font-bold">$71.43 <span class="text-red-500 text-xs">-2%</span></h2>
+                <div class="bg-white p-3 rounded shadow-sm border-t-2 border-blue-600">
+                    <p class="text-[9px] uppercase text-gray-400 font-bold">Matrículas</p>
+                    <p class="text-sm font-bold">250</p>
+                    <p class="text-[8px] text-green-500 font-bold">▲ 8%</p>
                 </div>
-                <div class="bg-white p-3 shadow-sm rounded border-t-4 border-blue-600">
-                    <p class="text-[10px] font-bold text-gray-500 uppercase">Matrículas</p>
-                    <h2 class="text-xl font-bold">250 <span class="text-green-500 text-xs">+8%</span></h2>
+                <div class="bg-white p-3 rounded shadow-sm border-t-2 border-blue-600">
+                    <p class="text-[9px] uppercase text-gray-400 font-bold">CPL</p>
+                    <p class="text-sm font-bold">$71.43</p>
+                    <p class="text-[8px] text-red-500 font-bold">▼ 2%</p>
                 </div>
-                <div class="bg-white p-3 shadow-sm rounded border-t-4 border-blue-600">
-                    <p class="text-[10px] font-bold text-gray-500 uppercase">CPA</p>
-                    <h2 class="text-xl font-bold">$600.00 <span class="text-red-500 text-xs">-1%</span></h2>
+                <div class="bg-white p-3 rounded shadow-sm border-t-2 border-blue-600 col-span-2 md:col-span-1">
+                    <p class="text-[9px] uppercase text-gray-400 font-bold">CPA (Costo por Matrícula)</p>
+                    <p class="text-sm font-bold">$600.00</p>
                 </div>
             </div>
 
-            <div class="bg-white p-4 shadow-sm rounded">
-                <h3 class="text-xs font-bold mb-4 uppercase border-b pb-1">Tendencia de Leads y Matrículas</h3>
-                <div class="h-[250px] md:h-[300px]"><canvas id="lineChartMain"></canvas></div>
-            </div>
-        </div>
-
-        <div id="rendimiento-canal" class="tab-content space-y-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div class="bg-white p-4 shadow rounded">
-                    <h3 class="text-xs font-bold mb-4 uppercase">Leads por Canal</h3>
-                    <canvas id="barCanal"></canvas>
-                </div>
-                <div class="bg-white p-4 shadow rounded">
-                    <h3 class="text-xs font-bold mb-4 uppercase">Costo por Lead por Canal</h3>
-                    <div class="max-w-[250px] mx-auto"><canvas id="donutCanal"></canvas></div>
+            <div class="bg-white p-3 rounded shadow-sm">
+                <h3 class="text-[10px] font-bold mb-3 uppercase text-blue-900 border-b pb-1">Tendencia Mensual</h3>
+                <div class="h-[200px] md:h-[300px]">
+                    <canvas id="chartTrend"></canvas>
                 </div>
             </div>
         </div>
 
-        <div id="rendimiento-campana" class="tab-content space-y-4">
-            <div class="bg-white p-4 shadow rounded overflow-x-auto">
-                <h3 class="text-xs font-bold mb-2 uppercase bg-blue-900 text-white p-1 px-2">Tabla de Campañas Top</h3>
-                <table class="w-full">
-                    <thead>
-                        <tr><th>Campaña</th><th>Inversión</th><th>Leads</th><th>CPL</th><th>Matrículas</th><th>CPA</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Maestría en Administración (Invierno)</td><td>$150,000</td><td>600</td><td>$71.43</td><td>100</td><td>$600.00</td></tr>
-                        <tr><td>Grado en Ingeniería (Primavera)</td><td>$125,000</td><td>430</td><td>$71.43</td><td>90</td><td>$48.38</td></tr>
-                    </tbody>
-                </table>
+        <div id="rendimiento-canal" class="tab-content space-y-3">
+            <div class="bg-white p-3 rounded shadow-sm">
+                <h3 class="text-[10px] font-bold mb-3 uppercase text-blue-900">Leads por Canal</h3>
+                <div class="h-[250px]">
+                    <canvas id="chartCanal"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-3 rounded shadow-sm">
+                <h3 class="text-[10px] font-bold mb-3 uppercase text-blue-900">Inversión %</h3>
+                <div class="h-[200px] flex justify-center">
+                    <canvas id="chartDoughnut"></canvas>
+                </div>
             </div>
         </div>
 
-        <div id="rendimiento-academico" class="tab-content space-y-4">
-            <div class="bg-white p-4 shadow rounded">
-                <h3 class="text-xs font-bold mb-4 uppercase">Leads y Matrículas por Programa</h3>
-                <canvas id="barAcademico"></canvas>
+        <div id="rendimiento-campana" class="tab-content space-y-3">
+            <div class="bg-white rounded shadow-sm overflow-hidden">
+                <div class="bg-blue-900 text-white p-2 text-[10px] font-bold uppercase">Ranking de Campañas</div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-100 text-[9px] uppercase italic">
+                            <tr>
+                                <th class="p-2 border-b">Campaña</th>
+                                <th class="p-2 border-b">Leads</th>
+                                <th class="p-2 border-b">CPL</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[10px]">
+                            <tr><td class="p-2 border-b font-medium">Maestría Admin.</td><td class="p-2 border-b text-center">600</td><td class="p-2 border-b text-center">$71</td></tr>
+                            <tr><td class="p-2 border-b font-medium">Grado Ingen.</td><td class="p-2 border-b text-center">430</td><td class="p-2 border-b text-center">$71</td></tr>
+                            <tr><td class="p-2 border-b font-medium">Psicología</td><td class="p-2 border-b text-center">300</td><td class="p-2 border-b text-center">$83</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-2 bg-gray-50 text-center text-[8px] text-gray-400 font-bold uppercase tracking-widest">Desliza para ver más →</div>
+            </div>
+        </div>
+
+        <div id="rendimiento-academico" class="tab-content space-y-3">
+            <div class="bg-white p-3 rounded shadow-sm">
+                <h3 class="text-[10px] font-bold mb-3 uppercase text-blue-900">Leads vs Matrículas</h3>
+                <div class="h-[250px]">
+                    <canvas id="chartAcademic"></canvas>
+                </div>
             </div>
         </div>
 
@@ -111,53 +130,65 @@
             btn.classList.add('active');
         }
 
-        const commonOptions = {
+        // Configuración Global para Móvil
+        const chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { labels: { font: { size: 10 } } } }
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9 } } }
+            },
+            scales: {
+                x: { ticks: { font: { size: 8 } } },
+                y: { ticks: { font: { size: 8 } } }
+            }
         };
 
         window.onload = function() {
-            new Chart(document.getElementById('lineChartMain'), {
+            // TENDENCIA
+            new Chart(document.getElementById('chartTrend'), {
                 type: 'line',
                 data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    labels: ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
                     datasets: [
-                        { label: 'Leads', data: [200, 250, 420, 180, 450, 430, 650, 480, 700, 750, 950, 450], borderColor: '#1e3a8a', tension: 0.3 },
-                        { label: 'Matrículas', data: [150, 180, 300, 120, 350, 220, 480, 350, 500, 480, 580, 300], borderColor: '#60a5fa', fill: true, backgroundColor: 'rgba(96, 165, 250, 0.1)' }
+                        { label: 'Leads', data: [20, 25, 42, 18, 45, 43, 65, 48, 70, 75, 95, 45], borderColor: '#1e3a8a', tension: 0.3 },
+                        { label: 'Mat.', data: [15, 18, 30, 12, 35, 22, 48, 35, 50, 48, 58, 30], borderColor: '#60a5fa', backgroundColor: 'rgba(96, 165, 250, 0.1)', fill: true }
                     ]
                 },
-                options: commonOptions
+                options: chartOptions
             });
 
-            new Chart(document.getElementById('barCanal'), {
-                type: 'bar', indexAxis: 'y',
+            // CANALES (Barra Horizontal)
+            new Chart(document.getElementById('chartCanal'), {
+                type: 'bar',
+                indexAxis: 'y',
                 data: {
-                    labels: ['Búsqueda Pagada', 'Red Social Pagada', 'Búsqueda Orgánica', 'Correo Electrónico', 'Referencia'],
+                    labels: ['Google Ads', 'Meta Ads', 'SEO', 'Email', 'Ref.'],
                     datasets: [{ label: 'Leads', data: [700, 500, 300, 250, 120], backgroundColor: '#1e3a8a' }]
                 },
-                options: commonOptions
+                options: chartOptions
             });
 
-            new Chart(document.getElementById('donutCanal'), {
+            // DONA
+            new Chart(document.getElementById('chartDoughnut'), {
                 type: 'doughnut',
                 data: {
-                    labels: ['Google Ads 40%', 'Meta Ads 30%', 'Organic 18%', 'Email 13%', 'Referral 13%'],
-                    datasets: [{ data: [40, 30, 18, 13, 13], backgroundColor: ['#1e3a8a', '#f97316', '#3b82f6', '#fbce07', '#cbd5e1'] }]
+                    labels: ['Paid', 'Social', 'Organic', 'Email'],
+                    datasets: [{ data: [40, 30, 18, 12], backgroundColor: ['#1e3a8a', '#f97316', '#3b82f6', '#fbce07'] }]
                 },
-                options: commonOptions
+                options: { ...chartOptions, scales: {} } 
             });
 
-            new Chart(document.getElementById('barAcademico'), {
+            // ACADEMICO
+            new Chart(document.getElementById('chartAcademic'), {
                 type: 'bar',
                 data: {
-                    labels: ['Admin', 'Ingeniería', 'Derecho', 'Psicología', 'Medicina'],
+                    labels: ['ADM', 'ING', 'DER', 'PSI', 'MED'],
                     datasets: [
-                        { label: 'Leads', data: [700, 500, 350, 220, 170], backgroundColor: '#60a5fa' },
-                        { label: 'Matrículas', data: [500, 500, 120, 80, 70], backgroundColor: '#1e3a8a' }
+                        { label: 'Leads', data: [70, 50, 35, 22, 17], backgroundColor: '#60a5fa' },
+                        { label: 'Mat.', data: [50, 45, 12, 8, 7], backgroundColor: '#1e3a8a' }
                     ]
                 },
-                options: commonOptions
+                options: chartOptions
             });
         };
     </script>
