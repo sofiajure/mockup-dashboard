@@ -11,95 +11,97 @@
         .tab-content.active { display: block; }
         .nav-tab.active { background-color: white; color: #002855; border-bottom: 4px solid #60a5fa; }
         .kpi-card { border-top: 4px solid #1e3a8a; }
-        th { background-color: #002855; color: white; padding: 10px; font-size: 11px; text-transform: uppercase; }
+        th { background-color: #002855; color: white; padding: 10px; font-size: 11px; text-transform: uppercase; white-space: nowrap; }
         td { padding: 8px; border: 1px solid #e2e8f0; font-size: 11px; }
+        /* Mejora para scroll en móvil */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
 
-    <header class="bg-[#002855] text-white p-4 flex justify-between items-center shadow-lg">
+    <header class="bg-[#002855] text-white p-4 flex flex-col md:flex-row justify-between items-center shadow-lg gap-4">
         <div class="flex items-center space-x-4">
             <div class="bg-white p-2 rounded text-[#002855] font-black text-xl">USIL</div>
-            <h1 class="text-xl font-bold uppercase">Cuadro de Mando de Adquisición de Estudiantes USIL</h1>
+            <h1 class="text-sm md:text-xl font-bold uppercase">Cuadro de Mando de Adquisición de Estudiantes USIL</h1>
         </div>
         <div class="text-xs">Rango: <span class="bg-blue-900 px-2 py-1 rounded">Jan 1 - Dec 31, 2026</span></div>
     </header>
 
-    <nav class="bg-[#002855] border-t border-blue-900 flex text-white text-xs font-bold">
-        <button onclick="changeTab(this, 'vista-general')" class="nav-tab active px-6 py-4">1. VISTA GENERAL</button>
-        <button onclick="changeTab(this, 'rendimiento-canal')" class="nav-tab px-6 py-4">2. RENDIMIENTO POR CANAL</button>
-        <button onclick="changeTab(this, 'rendimiento-campana')" class="nav-tab px-6 py-4">3. RENDIMIENTO POR CAMPAÑA</button>
-        <button onclick="changeTab(this, 'rendimiento-academico')" class="nav-tab px-6 py-4">4. RENDIMIENTO POR ACADÉMICO</button>
+    <nav class="bg-[#002855] border-t border-blue-900 flex overflow-x-auto no-scrollbar text-white text-[10px] md:text-xs font-bold">
+        <button onclick="changeTab(this, 'vista-general')" class="nav-tab active px-4 md:px-6 py-4 flex-shrink-0">1. VISTA GENERAL</button>
+        <button onclick="changeTab(this, 'rendimiento-canal')" class="nav-tab px-4 md:px-6 py-4 flex-shrink-0">2. RENDIMIENTO POR CANAL</button>
+        <button onclick="changeTab(this, 'rendimiento-campana')" class="nav-tab px-4 md:px-6 py-4 flex-shrink-0">3. RENDIMIENTO POR CAMPAÑA</button>
+        <button onclick="changeTab(this, 'rendimiento-academico')" class="nav-tab px-4 md:px-6 py-4 flex-shrink-0">4. RENDIMIENTO POR ACADÉMICO</button>
     </nav>
 
-    <main class="p-6">
+    <main class="p-4 md:p-6">
         
         <div id="vista-general" class="tab-content active space-y-6">
-            <div class="grid grid-cols-5 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <div class="bg-white p-4 shadow rounded kpi-card text-center">
-                    <p class="text-gray-500 text-xs font-bold">Inversión Total</p>
-                    <h2 class="text-2xl font-bold">$150,000 <span class="text-green-500 text-sm">▲</span></h2>
-                    <p class="text-[10px] text-green-600">+10% vs año ant.</p>
+                    <p class="text-gray-500 text-[10px] md:text-xs font-bold">Inversión Total</p>
+                    <h2 class="text-lg md:text-2xl font-bold">$150,000</h2>
+                    <p class="text-[10px] text-green-600">▲ +10%</p>
                 </div>
                 <div class="bg-white p-4 shadow rounded kpi-card text-center">
-                    <p class="text-gray-500 text-xs font-bold">Leads Totales</p>
-                    <h2 class="text-2xl font-bold">2,100</h2>
-                    <p class="text-[10px] text-green-600">+15% vs año ant.</p>
+                    <p class="text-gray-500 text-[10px] md:text-xs font-bold">Leads Totales</p>
+                    <h2 class="text-lg md:text-2xl font-bold">2,100</h2>
+                    <p class="text-[10px] text-green-600">▲ +15%</p>
                 </div>
                 <div class="bg-white p-4 shadow rounded kpi-card text-center">
-                    <p class="text-gray-500 text-xs font-bold">CPL</p>
-                    <h2 class="text-2xl font-bold">$71.43</h2>
-                    <p class="text-[10px] text-red-500">-2% vs año ant.</p>
+                    <p class="text-gray-500 text-[10px] md:text-xs font-bold">CPL</p>
+                    <h2 class="text-lg md:text-2xl font-bold">$71.43</h2>
+                    <p class="text-[10px] text-red-500">▼ -2%</p>
                 </div>
                 <div class="bg-white p-4 shadow rounded kpi-card text-center">
-                    <p class="text-gray-500 text-xs font-bold">Matrículas</p>
-                    <h2 class="text-2xl font-bold">250</h2>
-                    <p class="text-[10px] text-green-600">+8% vs año ant.</p>
+                    <p class="text-gray-500 text-[10px] md:text-xs font-bold">Matrículas</p>
+                    <h2 class="text-lg md:text-2xl font-bold">250</h2>
+                    <p class="text-[10px] text-green-600">▲ +8%</p>
                 </div>
-                <div class="bg-white p-4 shadow rounded kpi-card text-center">
-                    <p class="text-gray-500 text-xs font-bold">CPA</p>
-                    <h2 class="text-2xl font-bold">$600.00</h2>
-                    <p class="text-[10px] text-red-500">-1% vs año ant.</p>
+                <div class="bg-white p-4 shadow rounded kpi-card text-center col-span-2 md:col-span-1">
+                    <p class="text-gray-500 text-[10px] md:text-xs font-bold">CPA</p>
+                    <h2 class="text-lg md:text-2xl font-bold">$600.00</h2>
                 </div>
             </div>
-            <div class="bg-white p-6 shadow rounded">
-                <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Tendencia de Leads y Matrículas por Mes (2026)</h3>
-                <canvas id="lineChart" height="100"></canvas>
+            <div class="bg-white p-4 md:p-6 shadow rounded">
+                <h3 class="font-bold border-b pb-2 mb-4 uppercase text-xs md:text-sm">Tendencia de Leads y Matrículas por Mes</h3>
+                <div class="h-[250px] md:h-[auto]">
+                    <canvas id="lineChart" height="100"></canvas>
+                </div>
             </div>
         </div>
 
         <div id="rendimiento-canal" class="tab-content space-y-6">
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 shadow rounded">
                     <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Leads por Canal</h3>
                     <canvas id="barCanal"></canvas>
                 </div>
                 <div class="bg-white p-6 shadow rounded">
                     <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Costo por Lead por Canal</h3>
-                    <div class="w-3/4 mx-auto"><canvas id="donutCanal"></canvas></div>
+                    <div class="w-full md:w-3/4 mx-auto"><canvas id="donutCanal"></canvas></div>
                 </div>
             </div>
         </div>
 
         <div id="rendimiento-campana" class="tab-content space-y-6">
-            <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-8 bg-white p-6 shadow rounded">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div class="md:col-span-8 bg-white p-4 md:p-6 shadow rounded overflow-x-auto">
                     <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Tabla de Campañas Top</h3>
                     <table class="w-full text-left">
                         <thead>
                             <tr><th>Campaña</th><th>Inversión</th><th>Leads</th><th>CPL</th><th>Matrículas</th><th>CPA</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Maestría en Administración (Invierno)</td><td>$150,000</td><td>600</td><td>$71.43</td><td>100</td><td>$600.00</td></tr>
-                            <tr><td>Grado en Ingeniería (Primavera)</td><td>$125,000</td><td>430</td><td>$71.43</td><td>90</td><td>$48.38</td></tr>
-                            <tr><td>Grado en Psicología (Primavera)</td><td>$125,000</td><td>300</td><td>$83.33</td><td>70</td><td>$39.89</td></tr>
-                            <tr><td>Grado en Ingeniería (Primavera)</td><td>$125,000</td><td>180</td><td>$83.33</td><td>60</td><td>$68.99</td></tr>
-                            <tr><td>Grado en ADE - Invierno</td><td>$125,000</td><td>150</td><td>$83.33</td><td>40</td><td>$74.54</td></tr>
+                            <tr><td>Maestría en Administración</td><td>$150,000</td><td>600</td><td>$71.43</td><td>100</td><td>$600.00</td></tr>
+                            <tr><td>Grado en Ingeniería</td><td>$125,000</td><td>430</td><td>$71.43</td><td>90</td><td>$48.38</td></tr>
+                            <tr><td>Grado en Psicología</td><td>$125,000</td><td>300</td><td>$83.33</td><td>70</td><td>$39.89</td></tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-span-4 bg-white p-6 shadow rounded">
-                    <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Ranking de Campañas por Leads</h3>
+                <div class="md:col-span-4 bg-white p-6 shadow rounded">
+                    <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Ranking de Campañas</h3>
                     <canvas id="rankingCampana" height="300"></canvas>
                 </div>
             </div>
@@ -110,16 +112,14 @@
                 <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Leads y Matrículas por Programa</h3>
                 <canvas id="barAcademico" height="100"></canvas>
             </div>
-            <div class="bg-white p-6 shadow rounded">
-                <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Comparativa de Costo por Matrícula</h3>
+            <div class="bg-white p-4 md:p-6 shadow rounded overflow-x-auto">
+                <h3 class="font-bold border-b pb-2 mb-4 uppercase text-sm">Comparativa de Costo</h3>
                 <table class="w-full">
                     <tr class="bg-gray-100">
                         <td class="font-bold">Programa</td><td class="font-bold">Leads</td><td class="font-bold">Matrículas</td><td class="font-bold">CPL</td><td class="font-bold">CPA</td>
                     </tr>
-                    <tr><td>Administración de Negocios</td><td>700</td><td>500</td><td>$71.43</td><td>$600.00</td></tr>
+                    <tr><td>Adm. Negocios</td><td>700</td><td>500</td><td>$71.43</td><td>$600.00</td></tr>
                     <tr><td>Ingeniería Civil</td><td>500</td><td>500</td><td>$82.42</td><td>$694.44</td></tr>
-                    <tr><td>Psicología</td><td>290</td><td>180</td><td>$83.32</td><td>$694.44</td></tr>
-                    <tr><td>Medicina</td><td>290</td><td>180</td><td>$83.32</td><td>$694.44</td></tr>
                 </table>
             </div>
         </div>
@@ -134,55 +134,57 @@
             btn.classList.add('active');
         }
 
+        const chartConfig = { responsive: true, maintainAspectRatio: false };
+
         window.onload = function() {
-            // TENDENCIA (Imagen Ref)
             new Chart(document.getElementById('lineChart'), {
                 type: 'line',
                 data: {
                     labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
                     datasets: [
-                        { label: 'Leads', data: [200, 250, 420, 180, 450, 430, 650, 480, 700, 750, 950, 450], borderColor: '#1e3a8a', tension: 0.3 },
-                        { label: 'Matrículas', data: [150, 180, 300, 120, 350, 220, 480, 350, 500, 480, 580, 300], borderColor: '#60a5fa', fill: true, backgroundColor: 'rgba(96, 165, 250, 0.1)' }
+                        { label: 'Leads', data: [20, 25, 42, 18, 45, 43, 65, 48, 70, 75, 95, 45], borderColor: '#1e3a8a', tension: 0.3 },
+                        { label: 'Matrículas', data: [15, 18, 30, 12, 35, 22, 48, 35, 50, 48, 58, 30], borderColor: '#60a5fa', fill: true, backgroundColor: 'rgba(96, 165, 250, 0.1)' }
                     ]
-                }
+                },
+                options: chartConfig
             });
 
-            // CANALES
             new Chart(document.getElementById('barCanal'), {
                 type: 'bar', indexAxis: 'y',
                 data: {
-                    labels: ['Búsqueda Pagada', 'Red Social Pagada', 'Búsqueda Orgánica', 'Correo Electrónico', 'Referencia'],
+                    labels: ['Google Ads', 'Meta Ads', 'SEO', 'Email', 'Ref.'],
                     datasets: [{ label: 'Leads', data: [700, 500, 300, 250, 120], backgroundColor: '#1e3a8a' }]
-                }
+                },
+                options: chartConfig
             });
 
             new Chart(document.getElementById('donutCanal'), {
                 type: 'doughnut',
                 data: {
-                    labels: ['Google Ads', 'Meta Ads', 'Organic Market', 'Email', 'Referral'],
+                    labels: ['Google', 'Meta', 'Organic', 'Email', 'Referral'],
                     datasets: [{ data: [40, 30, 18, 13, 13], backgroundColor: ['#1e3a8a', '#f97316', '#3b82f6', '#fbce07', '#cbd5e1'] }]
                 }
             });
 
-            // CAMPANA RANKING
             new Chart(document.getElementById('rankingCampana'), {
                 type: 'bar',
                 data: {
-                    labels: ['Grado en ADE', 'Búsqueda Pagada', 'Ingeniería', 'Maestría Adm.', 'Grado Ing.'],
+                    labels: ['ADE', 'Pagada', 'Ing', 'Maestría', 'Grado'],
                     datasets: [{ label: 'Leads', data: [476, 109, 39, 11, 5], backgroundColor: '#002855' }]
-                }
+                },
+                options: chartConfig
             });
 
-            // ACADEMICO
             new Chart(document.getElementById('barAcademico'), {
                 type: 'bar',
                 data: {
-                    labels: ['Admin. Negocios', 'Ingeniería Civil', 'Derecho', 'Psicología', 'Medicina'],
+                    labels: ['Adm', 'Ing', 'Der', 'Psi', 'Med'],
                     datasets: [
-                        { label: 'Leads', data: [700, 500, 350, 220, 170], backgroundColor: '#60a5fa' },
-                        { label: 'Matrículas', data: [500, 500, 120, 80, 70], backgroundColor: '#1e3a8a' }
+                        { label: 'Leads', data: [70, 50, 35, 22, 17], backgroundColor: '#60a5fa' },
+                        { label: 'Matrículas', data: [50, 50, 12, 8, 7], backgroundColor: '#1e3a8a' }
                     ]
-                }
+                },
+                options: chartConfig
             });
         };
     </script>
