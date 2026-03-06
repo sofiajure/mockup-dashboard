@@ -3,149 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard USIL - Full Mockup</title>
+    <title>Mockup USIL - Dashboard Completo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .nav-tab.active { background-color: white; color: #002855; }
+        .nav-tab.active { background-color: white; color: #002855; border-bottom: 3px solid #60a5fa; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans text-gray-800">
 
-    <header class="bg-[#002855] text-white p-4 flex justify-between items-center">
+    <header class="bg-[#002855] text-white p-4 flex justify-between items-center shadow-md">
         <div class="flex items-center space-x-4">
-            <div class="bg-white p-2 rounded text-[#002855] font-bold">USIL</div>
-            <h1 class="text-xl font-bold uppercase">Cuadro de Mando de Adquisición</h1>
+            <div class="bg-white p-2 rounded text-[#002855] font-extrabold text-xl">USIL</div>
+            <h1 class="text-xl font-bold uppercase tracking-tight">Cuadro de Mando de Adquisición de Estudiantes</h1>
         </div>
+        <div class="text-sm bg-blue-900 px-3 py-1 rounded">Rango: Jan 1 - Dec 31, 2026</div>
     </header>
 
-    <nav class="bg-[#002855] border-t border-blue-800 flex text-white text-xs font-bold">
-        <button onclick="showTab('vista-general')" class="nav-tab active px-6 py-3 border-r border-blue-800">1. VISTA GENERAL</button>
-        <button onclick="showTab('rendimiento-canal')" class="nav-tab px-6 py-3 border-r border-blue-800">2. RENDIMIENTO POR CANAL</button>
-        <button onclick="showTab('rendimiento-campana')" class="nav-tab px-6 py-3 border-r border-blue-800">3. RENDIMIENTO POR CAMPAÑA</button>
-        <button onclick="showTab('rendimiento-academico')" class="nav-tab px-6 py-3">4. RENDIMIENTO POR ACADÉMICO</button>
+    <nav class="bg-[#002855] border-t border-blue-800 flex text-white text-xs font-bold overflow-x-auto">
+        <button onclick="changeTab(this, 'vista-general')" class="nav-tab active px-6 py-4 transition-all">1. VISTA GENERAL</button>
+        <button onclick="changeTab(this, 'rendimiento-canal')" class="nav-tab px-6 py-4 transition-all">2. RENDIMIENTO POR CANAL</button>
+        <button onclick="changeTab(this, 'rendimiento-campana')" class="nav-tab px-6 py-4 transition-all">3. RENDIMIENTO POR CAMPAÑA</button>
+        <button onclick="changeTab(this, 'rendimiento-academico')" class="nav-tab px-6 py-4 transition-all">4. RENDIMIENTO POR ACADÉMICO</button>
     </nav>
 
     <main class="p-6">
         
-        <div id="vista-general" class="tab-content active animate-fadeIn">
-            <div class="grid grid-cols-5 gap-4 mb-6">
+        <div id="vista-general" class="tab-content active">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 text-center">
                 <div class="bg-white p-4 shadow rounded border-t-4 border-blue-600">
-                    <p class="text-gray-500 text-sm">Inversión Total</p>
-                    <h2 class="text-2xl font-bold">$150,000</h2>
+                    <p class="text-gray-500 text-xs">Inversión Total</p>
+                    <h2 class="text-2xl font-bold">$150,000 <span class="text-green-500 text-sm">▲</span></h2>
                 </div>
                 <div class="bg-white p-4 shadow rounded border-t-4 border-blue-600">
-                    <p class="text-gray-500 text-sm">Leads Totales</p>
+                    <p class="text-gray-500 text-xs">Leads Totales</p>
                     <h2 class="text-2xl font-bold">2,100</h2>
                 </div>
+                <div class="bg-white p-4 shadow rounded border-t-4 border-blue-600">
+                    <p class="text-gray-500 text-xs">CPL</p>
+                    <h2 class="text-2xl font-bold">$71.43</h2>
                 </div>
+                <div class="bg-white p-4 shadow rounded border-t-4 border-blue-600">
+                    <p class="text-gray-500 text-xs">Matrículas</p>
+                    <h2 class="text-2xl font-bold">250</h2>
+                </div>
+                <div class="bg-white p-4 shadow rounded border-t-4 border-blue-600">
+                    <p class="text-gray-500 text-xs">CPA</p>
+                    <h2 class="text-2xl font-bold">$600.00</h2>
+                </div>
+            </div>
             <div class="bg-white p-6 shadow rounded">
-                <h3 class="font-bold mb-4">TENDENCIA DE LEADS Y MATRÍCULAS</h3>
+                <h3 class="font-bold border-b pb-2 mb-4">TENDENCIA DE LEADS Y MATRÍCULAS (2026)</h3>
                 <canvas id="lineChart" height="100"></canvas>
             </div>
         </div>
 
         <div id="rendimiento-canal" class="tab-content">
-            <div class="grid grid-cols-2 gap-6">
-                <div class="bg-white p-6 shadow rounded">
-                    <h3 class="font-bold mb-4">LEADS POR CANAL</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 shadow rounded text-center">
+                    <h3 class="font-bold border-b pb-2 mb-4">LEADS POR CANAL</h3>
                     <canvas id="barChartCanal"></canvas>
                 </div>
-                <div class="bg-white p-6 shadow rounded">
-                    <h3 class="font-bold mb-4">COSTO POR LEAD POR CANAL</h3>
-                    <canvas id="pieChartCanal"></canvas>
+                <div class="bg-white p-6 shadow rounded text-center">
+                    <h3 class="font-bold border-b pb-2 mb-4">DISTRIBUCIÓN DE COSTO POR CANAL</h3>
+                    <div class="w-2/3 mx-auto">
+                        <canvas id="donutChartCanal"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div id="rendimiento-campana" class="tab-content">
-            <div class="bg-white p-6 shadow rounded overflow-x-auto">
-                <h3 class="font-bold mb-4">TABLA DE CAMPAÑAS TOP</h3>
-                <table class="w-full text-left border-collapse">
+            <div class="bg-white p-6 shadow rounded">
+                <h3 class="font-bold border-b pb-2 mb-4 text-[#002855]">TABLA DE CAMPAÑAS TOP</h3>
+                <table class="w-full text-left text-sm">
                     <thead>
-                        <tr class="bg-blue-900 text-white text-sm">
-                            <th class="p-2">Campaña</th>
-                            <th class="p-2">Inversión</th>
-                            <th class="p-2">Leads</th>
-                            <th class="p-2">CPL</th>
-                            <th class="p-2">Matrículas</th>
+                        <tr class="bg-[#002855] text-white">
+                            <th class="p-2 border">Campaña</th>
+                            <th class="p-2 border">Inversión</th>
+                            <th class="p-2 border">Leads</th>
+                            <th class="p-2 border">CPL</th>
+                            <th class="p-2 border">Matrículas</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm">
-                        <tr class="border-b">
-                            <td class="p-2">Maestría en Administración (Invierno)</td>
-                            <td class="p-2">$150,000</td>
-                            <td class="p-2">600</td>
-                            <td class="p-2">$71.43</td>
-                            <td class="p-2">100</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="p-2">Grado en Ingeniería (Primavera)</td>
-                            <td class="p-2">$125,000</td>
-                            <td class="p-2">430</td>
-                            <td class="p-2">$71.43</td>
-                            <td class="p-2">90</td>
-                        </tr>
+                    <tbody>
+                        <tr class="border-b bg-gray-50"><td class="p-2 border">Maestría en Administración (Invierno)</td><td class="p-2 border">$150,000</td><td class="p-2 border">600</td><td class="p-2 border">$71.43</td><td class="p-2 border">100</td></tr>
+                        <tr class="border-b"><td class="p-2 border">Grado en Ingeniería (Primavera)</td><td class="p-2 border">$125,000</td><td class="p-2 border">430</td><td class="p-2 border">$71.43</td><td class="p-2 border">90</td></tr>
+                        <tr class="border-b bg-gray-50"><td class="p-2 border">Grado en Psicología (Primavera)</td><td class="p-2 border">$125,000</td><td class="p-2 border">300</td><td class="p-2 border">$83.33</td><td class="p-2 border">70</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
         <div id="rendimiento-academico" class="tab-content">
+            <div class="bg-white p-6 shadow rounded mb-6">
+                <h3 class="font-bold border-b pb-2 mb-4">LEADS Y MATRÍCULAS POR PROGRAMA</h3>
+                <canvas id="barChartAcademico" height="80"></canvas>
+            </div>
             <div class="bg-white p-6 shadow rounded">
-                <h3 class="font-bold mb-4">LEADS Y MATRÍCULAS POR PROGRAMA</h3>
-                <canvas id="barChartAcademico" height="120"></canvas>
+                <h3 class="font-bold border-b pb-2 mb-4">COMPARATIVA DE COSTOS</h3>
+                <table class="w-full text-xs text-left">
+                    <tr class="bg-gray-100 font-bold border-b">
+                        <td class="p-2">Programa</td><td class="p-2">Leads</td><td class="p-2">Matrículas</td><td class="p-2">CPL</td><td class="p-2">CPA</td>
+                    </tr>
+                    <tr class="border-b"><td class="p-2 font-bold">Admin. de Negocios</td><td class="p-2">700</td><td class="p-2">500</td><td class="p-2">$71.43</td><td class="p-2">$600.00</td></tr>
+                    <tr class="border-b"><td class="p-2 font-bold">Ingeniería Civil</td><td class="p-2">500</td><td class="p-2">500</td><td class="p-2">$82.42</td><td class="p-2">$694.44</td></tr>
+                </table>
             </div>
         </div>
 
     </main>
 
     <script>
-        // Lógica de Navegación
-        function showTab(tabId) {
-            // Ocultar todos los contenidos
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            // Quitar clase active de los botones
-            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+        // FUNCIÓN CLAVE: Cambia las pestañas ocultando y mostrando IDs
+        function changeTab(btn, tabId) {
+            // 1. Quitar clase 'active' de todos los botones
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(t => t.classList.remove('active'));
             
-            // Mostrar la pestaña seleccionada
+            // 2. Ocultar todos los contenidos
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // 3. Mostrar el contenido seleccionado y activar el botón
             document.getElementById(tabId).classList.add('active');
-            // Activar el botón clicado
-            event.currentTarget.classList.add('active');
+            btn.classList.add('active');
         }
 
-        // Gráfico Vista General
-        new Chart(document.getElementById('lineChart'), {
-            type: 'line',
-            data: {
-                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                datasets: [{ label: 'Leads', data: [200, 300, 450, 200, 500, 480, 700, 550, 780, 850, 1000, 500], borderColor: '#1e3a8a' }]
-            }
-        });
+        // Gráficos (se cargan al inicio)
+        const setupCharts = () => {
+            // Line Chart - Vista General
+            new Chart(document.getElementById('lineChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    datasets: [
+                        { label: 'Leads', data: [200, 250, 420, 180, 450, 430, 650, 480, 700, 750, 950, 450], borderColor: '#1e3a8a', fill: false },
+                        { label: 'Matrículas', data: [150, 180, 300, 120, 350, 220, 480, 350, 500, 480, 580, 300], borderColor: '#60a5fa', backgroundColor: 'rgba(96, 165, 250, 0.2)', fill: true }
+                    ]
+                }
+            });
 
-        // Gráfico Por Canal
-        new Chart(document.getElementById('barChartCanal'), {
-            type: 'bar',
-            data: {
-                labels: ['Búsqueda Pagada', 'Red Social', 'Orgánica', 'Email'],
-                datasets: [{ label: 'Leads', data: [700, 500, 300, 250], backgroundColor: '#1e3a8a' }]
-            }
-        });
+            // Bar Chart - Canales
+            new Chart(document.getElementById('barChartCanal'), {
+                type: 'bar',
+                indexAxis: 'y',
+                data: {
+                    labels: ['Búsqueda Pagada', 'Red Social Pagada', 'Búsqueda Orgánica', 'Correo Electrónico', 'Referencia'],
+                    datasets: [{ label: 'Leads', data: [700, 500, 300, 250, 120], backgroundColor: '#1e3a8a' }]
+                }
+            });
 
-        // Gráfico Académico
-        new Chart(document.getElementById('barChartAcademico'), {
-            type: 'bar',
-            indexAxis: 'y',
-            data: {
-                labels: ['Admin Negocios', 'Ingeniería Civil', 'Derecho', 'Psicología'],
-                datasets: [
-                    { label: 'Leads', data: [700, 500, 350, 220], backgroundColor: '#60a5fa' },
-                    { label: 'Matrículas', data: [500, 500, 120, 80], backgroundColor: '#1e3a8a' }
-                ]
-            }
-        });
+            // Donut Chart - Canal Costo
+            new Chart(document.getElementById('donutChartCanal'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Google Ads', 'Meta Ads', 'Organic', 'Email'],
+                    datasets: [{ data: [40, 30, 18, 12], backgroundColor: ['#1e3a8a', '#ea580c', '#60a5fa', '#fbbf24'] }]
+                }
+            });
+
+            // Bar Chart - Académico
+            new Chart(document.getElementById('barChartAcademico'), {
+                type: 'bar',
+                data: {
+                    labels: ['Admin. Negocios', 'Ingeniería Civil', 'Derecho', 'Psicología', 'Medicina'],
+                    datasets: [
+                        { label: 'Leads', data: [700, 500, 350, 220, 170], backgroundColor: '#60a5fa' },
+                        { label: 'Matrículas', data: [500, 500, 120, 80, 70], backgroundColor: '#1e3a8a' }
+                    ]
+                }
+            });
+        };
+
+        window.onload = setupCharts;
     </script>
 </body>
 </html>
